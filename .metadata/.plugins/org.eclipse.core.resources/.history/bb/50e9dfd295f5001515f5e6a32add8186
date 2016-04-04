@@ -1,0 +1,57 @@
+package toi_pack;
+
+import java.io.IOException;
+import org.jsoup.*;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.awt.*;
+
+
+public class TOI_Action_Demo {
+	static Document doc;
+	
+	public static void hit_url() throws IOException {
+	//	Desktop state = Desktop.getDesktop();
+		Document doc = Jsoup.connect("http://jsoup.org").get();
+		//state.browse(new URI("http://timesofindia.indiatimes.com/"));
+	}
+
+	public static void fetch_All_Links() throws IOException {
+		String title = doc.title();
+		System.out.println("page_Title::"+title);
+		Elements hyperLinks = doc.select("a[href]");
+		System.out.println("Number of Links on the launching page:"+ hyperLinks.size());
+		for(Element link: hyperLinks){
+			System.out.println("link Attributes:"+link.attr("abs:href"));
+		}
+
+	}
+	
+	public static void fetch_all_Images(){
+		Elements images = doc.select("img[src]");
+		System.out.println("Images count::"+images.size());
+		System.out.println("Number of image on the launching page:"+ images.size());
+		for(Element image:images ){
+			System.out.println("Image Attributes:"+image.attr("abs:src"));
+		}
+	}
+	
+	
+	
+	
+
+	public static void main(String[] args) throws IOException {
+		doc = Jsoup.connect("http://timesofindia.indiatimes.com/").get();
+		
+		hit_url();
+		System.out.println("*****************************");
+		fetch_All_Links();
+		System.out.println("*****************************");
+		fetch_all_Images();
+		
+		
+	}
+
+}

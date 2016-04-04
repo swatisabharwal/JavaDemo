@@ -1,0 +1,61 @@
+package toi_pack;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jsoup.*;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+
+
+public class TOI_Action_Demo {
+	static Document doc;
+	static int sizeOfLinks;
+	public static void hit_url() throws IOException {
+		Document doc = Jsoup.connect("http://timesofindia.indiatimes.com/").get();
+	}
+
+	public static void fetch_All_Links() throws IOException {
+		String title = doc.title();
+		System.out.println("page_Title::"+title);
+		Elements hyperLinks = doc.select("a[href]");
+		System.out.println("Number of Links on the launching page:"+ hyperLinks.size());
+		sizeOfLinks=hyperLinks.size();
+		//		for(Element link: hyperLinks){
+//			System.out.println("link Attributes:"+link.attr("abs:href"));
+//		}
+	}
+	
+	public static void fetch_all_Images(){
+		Elements images = doc.select("img[src]");
+		System.out.println("Images count::"+images.size());
+		System.out.println("Number of image on the launching page:"+ images.size());
+//		for(Element image:images ){
+//			System.out.println("Image Attributes:"+image.attr("abs:src"));
+//		}
+	}
+	
+	public static void navigate_to_all_links_within_page(){
+		int size = sizeOfLinks;
+		List<String> Alist = new ArrayList<String>();
+		
+			
+		
+	}
+	
+	
+	
+	
+
+	public static void main(String[] args) throws IOException {
+		doc = Jsoup.connect("http://timesofindia.indiatimes.com/").get();
+		System.out.println("*****************************");
+		System.out.println("*****************************");
+		fetch_all_Images();
+		
+		
+	}
+
+}
